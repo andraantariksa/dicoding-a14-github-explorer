@@ -1,8 +1,13 @@
 package id.shaderboi.github.ui.user
 
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import coil.load
@@ -34,6 +39,23 @@ class UserActivity : AppCompatActivity() {
         setupView()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_user, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menuItemShare -> {
+                CustomTabsIntent.Builder()
+                    .build()
+                    .launchUrl(this, Uri.parse(userBrief.htmlUrl))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun setupView() {
         lifecycleScope.launchWhenStarted {
             userViewModel.getUser(userBrief.login)
@@ -62,6 +84,24 @@ class UserActivity : AppCompatActivity() {
                         }
                         is Resource.Loaded -> {
                             val user = res.data
+
+                            linearLayoutMiscInfo.removeAllViews()
+                            user.location?.let { location ->
+                                linearLayoutMiscInfo.addView(TextView(this@UserActivity).apply {
+                                    text = location
+                                    textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+                                })
+                            }
+                            user.company?.let { company ->
+                                linearLayoutMiscInfo.addView(TextView(this@UserActivity).apply {
+                                    text = company
+                                    textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+                                })
+                            }
+
+
+                            textViewFollowerCount.text = user.followers.toString()
+                            textViewFollowingCount.text = user.following.toString()
 
                             imageView.load(user.avatarUrl) {
                                 crossfade(true)

@@ -17,6 +17,7 @@
         android:theme="@style/Theme.GithubExplorer"
         tools:targetApi="31">
         <activity
+            android:theme="@style/Theme.GithubExplorer.SplashScreen"
             android:name=".ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
