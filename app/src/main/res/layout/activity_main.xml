@@ -24,6 +24,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
                 app:lottie_rawRes="@raw/error" />
 
             <TextView
@@ -60,13 +62,40 @@
             app:shimmer_auto_start="true"
             tools:visibility="visible">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewUsers"
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/linearLayoutNoResult"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@drawable/divider8dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible"
+                android:showDividers="middle">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="300dp"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="32dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/no_result" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="20"
-                    tools:listitem="@layout/item_user" />
+                    android:text="@string/no_result_found"
+                    android:textSize="20dp" />
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewUsers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="20"
+                tools:listitem="@layout/item_user" />
         </com.facebook.shimmer.ShimmerFrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -1,7 +1,6 @@
-package id.shaderboi.github.domain.use_case
+package id.shaderboi.github.domain.usecase
 
 import id.shaderboi.github.domain.model.User
-import id.shaderboi.github.domain.model.UserBrief
 import id.shaderboi.github.domain.repository.GithubRepository
 import javax.inject.Inject
 

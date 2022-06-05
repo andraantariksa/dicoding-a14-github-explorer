@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Github Explorer</string>
+    <string name="following">Following</string>
+    <string name="followers">Followers</string>
+    <string name="no_result_found">No result found</string>
+    <string name="search">Search</string>
+    <string name="theme_toggle">Theme Toggle</string>
 </resources>

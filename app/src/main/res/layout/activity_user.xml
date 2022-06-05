@@ -22,6 +22,8 @@
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_marginTop="32dp"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -107,7 +109,7 @@
                     android:id="@+id/textViewName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="8dp"
                     android:minEms="10"
                     android:textAlignment="center"
                     android:textSize="20sp"
@@ -144,7 +146,7 @@
                         android:id="@+id/textViewFollowerLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Follower" />
+                        android:text="Followers" />
 
                     <TextView
                         android:id="@+id/textViewFollowerCount"
@@ -158,7 +160,7 @@
                         android:id="@+id/textViewFollowingLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Follower" />
+                        android:text="Following" />
 
                     <TextView
                         android:id="@+id/textViewFollowingCount"
@@ -168,7 +170,39 @@
                         android:text="13"
                         android:textStyle="bold" />
                 </LinearLayout>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayoutTabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayoutMiscInfo">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Followers" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Following" />
+
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager2Content"
+                    android:layout_width="0dp"
+                    android:layout_height="300dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tabLayoutTabs" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </com.facebook.shimmer.ShimmerFrameLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

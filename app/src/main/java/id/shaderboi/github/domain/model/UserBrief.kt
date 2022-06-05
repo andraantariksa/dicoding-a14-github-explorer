@@ -8,11 +8,11 @@ import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
 @Parcelize
-data class UserBrief(
+open class UserBrief(
     @Json(name = "avatar_url")
-    val avatarUrl: String,
+    val avatarUrl: String?,
     @Json(name = "events_url")
-    val eventsUrl: String,
+    val eventsUrl: String?,
     @Json(name = "followers_url")
     val followersUrl: String,
     @Json(name = "following_url")
@@ -20,7 +20,7 @@ data class UserBrief(
     @Json(name = "gists_url")
     val gistsUrl: String,
     @Json(name = "gravatar_id")
-    val gravatarId: String,
+    val gravatarId: String?,
     @Json(name = "html_url")
     val htmlUrl: String,
     @Json(name = "id")

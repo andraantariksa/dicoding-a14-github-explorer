@@ -6,40 +6,38 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import id.shaderboi.github.R
 import id.shaderboi.github.databinding.ActivityUserBinding
-import id.shaderboi.github.domain.model.UserBrief
 import id.shaderboi.github.domain.util.Resource
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class UserActivity : AppCompatActivity() {
-    private var _binding: ActivityUserBinding? = null
-    val binding get() = _binding!!
-
-    private lateinit var userBrief: UserBrief
+    private lateinit var binding: ActivityUserBinding
 
     private val userViewModel by viewModels<UserViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        userBrief = intent.getParcelableExtra("user")!!
+        userViewModel.userBrief = intent.getParcelableExtra("user")!!
 
-        _binding = ActivityUserBinding.inflate(layoutInflater)
+        binding = ActivityUserBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
         setupView()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_user, menu)
         return true
     }
@@ -49,16 +47,28 @@ class UserActivity : AppCompatActivity() {
             R.id.menuItemShare -> {
                 CustomTabsIntent.Builder()
                     .build()
-                    .launchUrl(this, Uri.parse(userBrief.htmlUrl))
+                    .launchUrl(this, Uri.parse(userViewModel.userBrief.htmlUrl))
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
+    @StringRes
+    private val tabTitles = intArrayOf(R.string.following, R.string.followers)
+
     private fun setupView() {
         lifecycleScope.launchWhenStarted {
-            userViewModel.getUser(userBrief.login)
+            userViewModel.getUser(userViewModel.userBrief.login)
+
+            binding.viewPager2Content.adapter =
+                SectionsPageAdapter(
+                    supportFragmentManager,
+                    lifecycle
+                )
+            TabLayoutMediator(binding.tabLayoutTabs, binding.viewPager2Content) { tab, position ->
+                tab.text = resources.getString(tabTitles[position])
+            }.attach()
 
             userViewModel.user.collectLatest { res ->
                 binding.apply {
