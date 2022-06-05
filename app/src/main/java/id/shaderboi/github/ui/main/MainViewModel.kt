@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.shaderboi.github.domain.model.UserBrief
-import id.shaderboi.github.domain.usecase.UserUseCases
+import id.shaderboi.github.domain.usecase.user.UserUseCases
 import id.shaderboi.github.domain.util.Resource
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(private val userUseCases: UserUseCases) 
 
     private var job: Job? = null
 
-    fun queryUsers(query: String? = null, direct: Boolean = false) {
+    fun queryUsers(query: String? = null, @Suppress("UNUSED_PARAMETER") direct: Boolean = false) {
         job?.cancel()
         job = viewModelScope.launch {
             if (!(query == null || query.isBlank())) {

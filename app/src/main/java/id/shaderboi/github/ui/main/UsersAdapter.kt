@@ -14,17 +14,19 @@ class UsersAdapter(
     private val onClickListener: ((view: View, userBrief: UserBrief) -> Unit)? = null
 ) :
     RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
-    class ViewHolder(val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemUserBinding, var id: Int) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemUserBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, -1)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val user = userBriefs[position]
 
+        holder.id = user.id
         holder.binding.apply {
             textViewUsername.text = user.login
             imageViewAvatar.load(user.avatarUrl) {

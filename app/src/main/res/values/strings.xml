@@ -5,4 +5,8 @@
     <string name="no_result_found">No result found</string>
     <string name="search">Search</string>
     <string name="theme_toggle">Theme Toggle</string>
+    <string name="favorite">Favorite</string>
+    <string name="swipe_favorited_user_to_right_to_remove_them">Swipe favorited user to right to remove them</string>
+    <string name="an_error_has_just_occured">An error has just occurred!</string>
+    <string name="user_profile_picture">User profile picture</string>
 </resources>

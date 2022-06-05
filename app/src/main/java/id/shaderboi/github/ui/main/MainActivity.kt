@@ -1,6 +1,5 @@
 package id.shaderboi.github.ui.main
 
-import id.shaderboi.github.domain.repository.SettingsRepository
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -15,7 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.shaderboi.github.R
 import id.shaderboi.github.databinding.ActivityMainBinding
 import id.shaderboi.github.domain.model.Theme
+import id.shaderboi.github.domain.repository.SettingsRepository
 import id.shaderboi.github.domain.util.Resource
+import id.shaderboi.github.ui.favorite.FavoriteActivity
 import id.shaderboi.github.ui.user.UserActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -46,6 +47,13 @@ class MainActivity : AppCompatActivity() {
 
         val menuItemSearch = menu.findItem(R.id.menuItemSearch)
         val menuItemThemeToggle = menu.findItem(R.id.menuItemThemeToggle)
+        val menuItemFavorite = menu.findItem(R.id.menuItemFavorite)
+
+        menuItemFavorite.setOnMenuItemClickListener { _ ->
+            startActivity(Intent(this, FavoriteActivity::class.java))
+
+            true
+        }
 
         val searchView = menuItemSearch.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -102,12 +110,12 @@ class MainActivity : AppCompatActivity() {
                             linearLayoutNoResult.isVisible = res.data.isEmpty()
                             recyclerViewUsers.isVisible = res.data.isNotEmpty()
                             if (res.data.isNotEmpty()) {
-                                recyclerViewUsers.adapter = UsersAdapter(res.data) { view, user ->
-                                    val intent =
+                                recyclerViewUsers.adapter = UsersAdapter(res.data) { _, user ->
+                                    startActivity(
                                         Intent(this@MainActivity, UserActivity::class.java).apply {
                                             putExtra("user", user)
                                         }
-                                    startActivity(intent)
+                                    )
                                 }
                             }
                         }

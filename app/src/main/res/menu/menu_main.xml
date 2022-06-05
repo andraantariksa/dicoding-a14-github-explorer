@@ -13,4 +13,9 @@
         android:icon="@drawable/ic_baseline_dark_mode_24"
         android:title="@string/theme_toggle"
         app:showAsAction="collapseActionView|ifRoom" />
+    <item
+        android:id="@+id/menuItemFavorite"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/favorite"
+        app:showAsAction="collapseActionView|ifRoom" />
 </menu>

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.shaderboi.github.domain.model.UserBrief
-import id.shaderboi.github.domain.usecase.UserUseCases
+import id.shaderboi.github.domain.usecase.user.UserUseCases
 import id.shaderboi.github.domain.util.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

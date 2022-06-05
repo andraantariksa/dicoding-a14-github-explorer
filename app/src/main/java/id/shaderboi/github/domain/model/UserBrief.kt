@@ -4,45 +4,68 @@ package id.shaderboi.github.domain.model
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import id.shaderboi.github.data.data_source.db.entity.UserBriefFavoriteEntity
 import kotlinx.parcelize.Parcelize
 
 @JsonClass(generateAdapter = true)
 @Parcelize
 open class UserBrief(
     @Json(name = "avatar_url")
-    val avatarUrl: String?,
+    open val avatarUrl: String?,
     @Json(name = "events_url")
-    val eventsUrl: String?,
+    open val eventsUrl: String?,
     @Json(name = "followers_url")
-    val followersUrl: String,
+    open val followersUrl: String,
     @Json(name = "following_url")
-    val followingUrl: String,
+    open val followingUrl: String,
     @Json(name = "gists_url")
-    val gistsUrl: String,
+    open val gistsUrl: String,
     @Json(name = "gravatar_id")
-    val gravatarId: String?,
+    open val gravatarId: String?,
     @Json(name = "html_url")
-    val htmlUrl: String,
+    open val htmlUrl: String,
     @Json(name = "id")
-    val id: Int,
+    open val id: Int,
     @Json(name = "login")
-    val login: String,
+    open val login: String,
     @Json(name = "node_id")
-    val nodeId: String,
+    open val nodeId: String,
     @Json(name = "organizations_url")
-    val organizationsUrl: String,
+    open val organizationsUrl: String,
     @Json(name = "received_events_url")
-    val receivedEventsUrl: String,
+    open val receivedEventsUrl: String,
     @Json(name = "repos_url")
-    val reposUrl: String,
+    open val reposUrl: String,
     @Json(name = "site_admin")
-    val siteAdmin: Boolean,
+    open val siteAdmin: Boolean,
     @Json(name = "starred_url")
-    val starredUrl: String,
+    open val starredUrl: String,
     @Json(name = "subscriptions_url")
-    val subscriptionsUrl: String,
+    open val subscriptionsUrl: String,
     @Json(name = "type")
-    val type: String,
+    open val type: String,
     @Json(name = "url")
-    val url: String
-): Parcelable
+    open val url: String
+) : Parcelable {
+    fun toEntity(): UserBriefFavoriteEntity =
+        UserBriefFavoriteEntity(
+            id = id,
+            avatarUrl = avatarUrl,
+            eventsUrl = eventsUrl,
+            followersUrl = followersUrl,
+            followingUrl = followingUrl,
+            gistsUrl = gistsUrl,
+            gravatarId = gravatarId,
+            htmlUrl = htmlUrl,
+            login = login,
+            nodeId = nodeId,
+            organizationsUrl = organizationsUrl,
+            receivedEventsUrl = receivedEventsUrl,
+            reposUrl = reposUrl,
+            siteAdmin = siteAdmin,
+            starredUrl = starredUrl,
+            subscriptionsUrl = subscriptionsUrl,
+            type = type,
+            url = url
+        )
+}

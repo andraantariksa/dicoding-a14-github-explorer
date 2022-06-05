@@ -1,4 +1,4 @@
-package id.shaderboi.github.domain.usecase
+package id.shaderboi.github.domain.usecase.user
 
 import id.shaderboi.github.domain.model.UserBrief
 import id.shaderboi.github.domain.repository.GithubRepository
