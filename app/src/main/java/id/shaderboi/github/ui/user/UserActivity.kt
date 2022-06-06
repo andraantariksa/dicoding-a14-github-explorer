@@ -38,6 +38,11 @@ class UserActivity : AppCompatActivity() {
         setupView()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return super.onSupportNavigateUp()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_user, menu)
 

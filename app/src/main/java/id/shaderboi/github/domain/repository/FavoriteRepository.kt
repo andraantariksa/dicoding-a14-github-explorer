@@ -7,5 +7,5 @@ interface FavoriteRepository {
     suspend fun add(userBrief: UserBrief)
     fun get(id: Int): Flow<UserBrief?>
     suspend fun remove(id: Int)
-    val data: Flow<List<UserBrief>>
+    fun get(): Flow<List<UserBrief>>
 }

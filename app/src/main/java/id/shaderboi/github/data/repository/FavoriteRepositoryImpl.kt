@@ -8,8 +8,7 @@ import kotlinx.coroutines.flow.Flow
 class FavoriteRepositoryImpl(database: GithubExplorerDatabase) : FavoriteRepository {
     private val favoriteDao = database.favoriteDao
 
-    override val data: Flow<List<UserBrief>>
-        get() = favoriteDao.get()
+    override fun get(): Flow<List<UserBrief>> = favoriteDao.get()
 
     override suspend fun add(userBrief: UserBrief) {
         favoriteDao.add(userBrief.toEntity())
